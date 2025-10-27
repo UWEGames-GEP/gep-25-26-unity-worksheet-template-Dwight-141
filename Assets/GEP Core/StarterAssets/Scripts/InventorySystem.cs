@@ -15,6 +15,7 @@ public class InventorySystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1) && gameManager.currentState == GameManager.GameState.PLAY)
         {
             AddItem("Common Item");
@@ -22,7 +23,7 @@ public class InventorySystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2) && gameManager.currentState == GameManager.GameState.PLAY)
         {
             RemoveItem("Common Item");
-        }
+        }*/
     }
 
     public void AddItem(string itemName)
@@ -33,5 +34,16 @@ public class InventorySystem : MonoBehaviour
     public void RemoveItem(string itemName)
     {
         items.Remove(itemName);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        itemScript collisionItem = hit.gameObject.GetComponent<itemScript>();
+
+        if (collisionItem != null)
+        {
+            items.Add(collisionItem.name);
+            Destroy(collisionItem.gameObject);
+        }
     }
 }
