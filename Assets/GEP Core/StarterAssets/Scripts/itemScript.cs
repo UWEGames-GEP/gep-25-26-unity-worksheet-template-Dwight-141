@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class itemScript : MonoBehaviour
 {
-    public string item_name;
+    public string itemName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

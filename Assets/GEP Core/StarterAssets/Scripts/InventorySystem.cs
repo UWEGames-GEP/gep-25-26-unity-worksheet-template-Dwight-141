@@ -34,31 +34,38 @@ public class InventorySystem : MonoBehaviour
         items.Add(item);
     }
 
-    /*public void RemoveItem(itemScript item)
+    public void RemoveItem(itemScript item)
     {
+        Vector3 currentPosition = transform.position;
+        Vector3 forward = transform.forward;
+
+        Vector3 newPosition = currentPosition + forward;
+        newPosition += new Vector3(0, 1, 0);
+
+        Quaternion currentRotation = transform.rotation;
+        Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
+
+        GameObject newItem = Instantiate(item.gameObject, newPosition, newRotation, worldItemsTransform);
+        newItem.SetActive(true);
+
         items.Remove(item);
-    }*/
+        Destroy(item.gameObject);
+    }
+
+    public void RemoveItem(int i)
+    {
+        if (i < items.Count)
+        {
+            RemoveItem(items[i]);
+        }
+    }
 
     public void RemoveItem()
     {
         if ((gameManager.currentState == GameState.PLAY) && (items.Count > 0))
         {
             itemScript item = items[0];
-
-            Vector3 currentPosition = transform.position;
-            Vector3 forward = transform.forward;
-
-            Vector3 newPosition = currentPosition + forward;
-            newPosition += new Vector3(0, 1, 0);
-
-            Quaternion currentRotation = transform.rotation;
-            Quaternion newRotation = currentRotation * Quaternion.Euler(0, 0, 180);
-
-            GameObject newItem = Instantiate(item.gameObject, newPosition, newRotation, worldItemsTransform);
-            newItem.SetActive(true);
-
-            items.Remove(item);
-            Destroy(item.gameObject);
+            RemoveItem(item);
         }
     }
 
